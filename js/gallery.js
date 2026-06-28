@@ -77,8 +77,8 @@ const liTxt = images
               src="${preview}"
               data-source="${original}"
               alt="${description}"
-              width: 360;
-              height: 200
+              width=360
+              height=200
             />
           </a>
         </li>`;
@@ -89,7 +89,7 @@ galleryEl.insertAdjacentHTML('beforeend', liTxt);
 
 galleryEl.addEventListener('click', e => {
   const imageSource = e.target.dataset.source;
-  if (imageSource) {
+  if (e.target.nodeName === 'IMG') {
     const instance = basicLightbox.create(
       `<img src="${imageSource}" width="1112" height="640">`,
       {
@@ -98,6 +98,6 @@ galleryEl.addEventListener('click', e => {
     );
 
     instance.show();
+    e.preventDefault();
   }
-  e.preventDefault();
 });
