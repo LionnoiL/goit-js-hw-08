@@ -66,24 +66,26 @@ const images = [
 
 const galleryEl = document.querySelector('.gallery');
 
-images.forEach(img => {
-  const { preview, original, description } = img;
-  const liTxt = `
-  <li class="gallery-item">
-    <a class="gallery-link" href="${original}">
-      <img
-        class="gallery-image"
-        src="${preview}"
-        data-source="${original}"
-        alt="${description}"
-        width: 360px;
-        height: 200px;
-      />
-    </a>
-  </li>`;
+const liTxt = images
+  .map(img => {
+    const { preview, original, description } = img;
+    return `
+        <li class="gallery-item">
+          <a class="gallery-link" href="${original}">
+            <img
+              class="gallery-image"
+              src="${preview}"
+              data-source="${original}"
+              alt="${description}"
+              width: 360;
+              height: 200
+            />
+          </a>
+        </li>`;
+  })
+  .join('');
 
-  galleryEl.insertAdjacentHTML('beforeend', liTxt);
-});
+galleryEl.insertAdjacentHTML('beforeend', liTxt);
 
 galleryEl.addEventListener('click', e => {
   const imageSource = e.target.dataset.source;
